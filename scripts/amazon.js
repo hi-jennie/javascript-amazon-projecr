@@ -5,7 +5,8 @@ generate HTML
 make wev page interactive
 */
 console.log('Hello, World!');
-
+import {cart} from '../data/cart.js';
+import {products} from '../data/products.js';
 // save data
 // const products = [
 //   {
@@ -99,7 +100,14 @@ document.querySelectorAll('.js-add-to-cart')
           quantity: 1
         });
       }
-      console.log(cart);
+      
+      let cartQuantity = 0;
+      cart.forEach((item)=>{
+        cartQuantity += item.quantity;
+      });
+
+      document.querySelector('.cart-quantity').innerHTML = cartQuantity;
     });
   });
 
+ 
