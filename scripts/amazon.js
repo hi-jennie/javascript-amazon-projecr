@@ -7,17 +7,17 @@ make wev page interactive
 console.log('Hello, World!');
 
 // save data
-const products = [
-  {
-    image: 'images/products/athletic-cotton-socks-6-pairs.jpg',
-    name: 'Black and Gray Athletic Cotton Socks - 6 Pairs',
-    rating: {
-      stars: 4.5,
-      count: 87
-    },
-    priceCents: 1090
-  }
-];
+// const products = [
+//   {
+//     image: 'images/products/athletic-cotton-socks-6-pairs.jpg',
+//     name: 'Black and Gray Athletic Cotton Socks - 6 Pairs',
+//     rating: {
+//       stars: 4.5,
+//       count: 87
+//     },
+//     priceCents: 1090
+//   }
+// ];
 // load data from the json file
 
 // generate the HTML
@@ -67,8 +67,8 @@ products.forEach((product)=>{
       <img src="images/icons/checkmark.png">
       Added
     </div>
-
-    <button class="add-to-cart-button button-primary">
+    <button class="add-to-cart-button button-primary js-add-to-cart"
+    data-product-id=${product.id}>
       Add to Cart
     </button>
   </div>
@@ -76,3 +76,30 @@ products.forEach((product)=>{
 });
 
 document.querySelector('.products-grid').innerHTML = html;
+
+document.querySelectorAll('.js-add-to-cart')
+  .forEach((button)=>{
+    button.addEventListener('click', ()=>{
+      // this step coming from data-product-id=${product.id} in the button(attributes:attach data to element)
+      // this attribute should start with data-; convert product-id to productId as the name of the attribute
+      const productId = button.dataset.productId; 
+      
+      let matchingItem;
+
+      cart.forEach((item)=>{
+        if(item.productId === productId){
+          matchingItem = item;
+        }
+      });
+      if(matchingItem){
+        matchingItem.quantity += 1;
+      }else{
+        cart.push({
+          productId: productId,
+          quantity: 1
+        });
+      }
+      console.log(cart);
+    });
+  });
+
