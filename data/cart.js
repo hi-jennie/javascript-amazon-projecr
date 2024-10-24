@@ -1,4 +1,8 @@
-export let cart = [
+// JSON.parse(localStorage.getItem('cart')); 是从本地解析一个叫'cart'的东西。
+export let cart = JSON.parse(localStorage.getItem('cart'));
+
+if(!cart){
+  cart = [
   {
     productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
     quantity: 1
@@ -8,6 +12,15 @@ export let cart = [
     quantity: 1
   }
 ];
+}
+
+
+// using localStorage to store the information of cart
+// cause when we refresh the page, the app will also reset the cart variable
+function saveToStorage() {
+  // JSON.stringify(cart) 是将cart 数组里面的内容变成JSON格式，然后存入本地一个叫本地叫'cart' 的变量里面
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
 
 export function addToCart(productId){
   let matchingItem;
@@ -25,6 +38,7 @@ export function addToCart(productId){
       quantity: 1
     });
   }
+  saveToStorage();
 }
 
 export function removeFromCart(productId){
@@ -36,4 +50,5 @@ export function removeFromCart(productId){
   });
   
   cart = newCart;
+  saveToStorage();
 }
