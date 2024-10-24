@@ -4,21 +4,15 @@ save data
 generate HTML
 make wev page interactive
 */
+/*
+import * as cartModule from '../data/cart.js';
+cartModule.addToCart();
+cartModule.cart;
+*/
 console.log('Hello, World!');
-import {cart} from '../data/cart.js';
+import {cart, addToCart} from '../data/cart.js';
 import {products} from '../data/products.js';
-// save data
-// const products = [
-//   {
-//     image: 'images/products/athletic-cotton-socks-6-pairs.jpg',
-//     name: 'Black and Gray Athletic Cotton Socks - 6 Pairs',
-//     rating: {
-//       stars: 4.5,
-//       count: 87
-//     },
-//     priceCents: 1090
-//   }
-// ];
+
 // load data from the json file
 
 // generate the HTML
@@ -78,6 +72,15 @@ products.forEach((product)=>{
 
 document.querySelector('.products-grid').innerHTML = html;
 
+function updateCartQuantity(){
+  let cartQuantity = 0;
+  cart.forEach((item)=>{
+    cartQuantity += item.quantity;
+  });
+
+  document.querySelector('.cart-quantity').innerHTML = cartQuantity;
+}
+
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button)=>{
     button.addEventListener('click', ()=>{
@@ -85,28 +88,10 @@ document.querySelectorAll('.js-add-to-cart')
       // this attribute should start with data-; convert product-id to productId as the name of the attribute
       const productId = button.dataset.productId; 
       
-      let matchingItem;
-
-      cart.forEach((item)=>{
-        if(item.productId === productId){
-          matchingItem = item;
-        }
-      });
-      if(matchingItem){
-        matchingItem.quantity += 1;
-      }else{
-        cart.push({
-          productId: productId,
-          quantity: 1
-        });
-      }
+      addToCart(productId);
       
-      let cartQuantity = 0;
-      cart.forEach((item)=>{
-        cartQuantity += item.quantity;
-      });
-
-      document.querySelector('.cart-quantity').innerHTML = cartQuantity;
+      updateCartQuantity();
+      
     });
   });
 
