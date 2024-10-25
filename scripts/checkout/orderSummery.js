@@ -123,7 +123,7 @@ document.querySelectorAll('.js-delete-link')
     
       const deleteContainer = document.querySelector(`.js-cart-item-container-${productId}`);
       deleteContainer.remove();
-      renderPaymentSummery();
+      renderPaymentSummery()
       
     });   
   });
