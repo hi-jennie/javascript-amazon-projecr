@@ -1,3 +1,4 @@
+
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -658,3 +659,14 @@ export const products = [
     ]
   }
 ];
+
+
+export function getProductById(productId) {
+  let matchingProduct;
+  products.forEach((currProduct) => {
+    if(currProduct.id === productId ){
+      matchingProduct = currProduct;
+    }
+  });
+  return matchingProduct;
+}
