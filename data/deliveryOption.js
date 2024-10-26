@@ -25,3 +25,16 @@ export function getDeliveryOption(deliveryOptionId){
   });
   return matchingDeliveryOption || deliveryOptions[0];
 }
+
+export function updateDeliveryOption(productId, deliveryOptionId){
+  let matchingItem;
+
+  cart.forEach((item)=>{
+    if(item.productId === productId){
+      matchingItem = item;
+    }
+  });
+
+  matchingItem.deliveryOptionId = deliveryOptionId;
+  saveToStorage();
+}
