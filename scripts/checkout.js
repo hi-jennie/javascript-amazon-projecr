@@ -1,24 +1,20 @@
 import { renderOrderSummery } from "./checkout/orderSummery.js";
 import { renderPaymentSummery } from "./checkout/paymentSummery.js";
-import { loadProducts } from "../data/products.js";
+import { loadProducts, loadProductsFetch } from "../data/products.js";
 import { loadCart } from "../data/cart.js";
 import '../data/cart-class.js';
 
 // Promise.all let us to run all the promises at the same time
 
 Promise.all([
-  new Promise((resolve)=>{
-    loadProducts(()=>{
-      resolve('value1');
-    });
-  }),
+  loadProductsFetch(),
   new Promise((resolve)=>{
     loadCart(()=>{
       resolve();
     });
   })
 ]).then((values)=>{
-  console.log(values); // ['value1', undefined]
+  console.log(values); // [, undefined]
   renderOrderSummery();
   renderPaymentSummery();
 });
