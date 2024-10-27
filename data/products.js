@@ -716,6 +716,34 @@ export const products = [
   return new Product(productDetails);
 });
 
-console.log(products);
+
+const date = new Date();
+console.log(date.toLocaleTimeString());
+
+// special feature of this keyword
+// inside a method, 'this' refers to the object that owns the method
+const object = {
+  name: 'John',
+  age: 32,
+  greet: function(){
+    console.log(this);
+  }
+}
+
+// inside a function, this = undefined
+function logThis(){
+  console.log(this);
+}
+logThis(); // in this situation, this is undefined
+logThis.call('hello'); // in this situation, this is a string
 
 
+// arrow function does not change the value of this 
+this
+const object3 = {
+  method: ()=>{
+    console.log(this); // this is the value outsized the arrow function
+  }
+}
+
+object3.method(); // this undefined
