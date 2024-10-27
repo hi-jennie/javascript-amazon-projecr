@@ -5,18 +5,24 @@ import { loadCart } from "../data/cart.js";
 import '../data/cart-class.js';
 
 // async: this will return a promise
-
 async function loadPage(){
   console.log('loadPage');
   // await: block the code until the promise is resolved
-  await loadProductsFetch();
+  try{
+    await loadProductsFetch();
 
-  // instead of pass value3 to the next then(), we can use a variable to store the value
-  const value = await new Promise((resolve)=>{
-    loadCart(()=>{
-      resolve('value3');
+    // instead of pass value3 to the next then(), we can use a variable to store the value
+    const value = await new Promise((resolve, reject)=>{
+      // throw new Error('error');
+      loadCart(()=>{
+        // reject('error');
+        resolve('value3');// reject and resolve 只能有一个被执行
+      });
     });
-  });
+  
+  } catch(error){
+    console.error(error);
+  }
 
   renderOrderSummery();
   renderPaymentSummery();

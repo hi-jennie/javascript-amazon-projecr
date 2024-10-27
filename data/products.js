@@ -69,7 +69,9 @@ export function loadProductsFetch(){
       return new Product(productDetails);
     });
     console.log('load products');
-  });
+  })/*.catch((error)=>{
+    console.log('error loading products', error);
+  });*/
   return promise;
 }
 
