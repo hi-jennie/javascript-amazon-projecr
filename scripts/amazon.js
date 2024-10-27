@@ -11,14 +11,15 @@ cartModule.cart;
 */
 console.log('Hello, World!');
 import {cart, addToCart} from '../data/cart.js';
-import {products} from '../data/products.js';
+import {products,loadProducts} from '../data/products.js';
 import {formatCurrency} from './utils/money.js';
 
 // load data from the json file
-
+loadProducts(renderProductsGrid);
 // generate the HTML
-let html = '';
-products.forEach((product)=>{
+function renderProductsGrid(){
+  let html = '';
+  products.forEach((product)=>{
   html += `
   <div class="product-container">
     <div class="product-image-container">
@@ -99,3 +100,4 @@ document.querySelectorAll('.js-add-to-cart')
   });
 
  
+}

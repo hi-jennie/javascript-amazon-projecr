@@ -1,4 +1,4 @@
-const xhr = XMLHttpRequest();
+const xhr = new XMLHttpRequest();
 
 // it takes some time for the response to come back
 // so we use the event listener to listen for the response
