@@ -69,6 +69,7 @@ export function renderPaymentSummery(){
 
   document.querySelector('.js-place-order').addEventListener('click', async ()=>{
     try{
+      // 将购物车里面的内容发动到后端用于创建订单
       const response = await fetch('https://supersimplebackend.dev/orders', {
         method: 'POST',
         headers: {
@@ -78,8 +79,9 @@ export function renderPaymentSummery(){
           cart: cart
         })
       });
-  
+      // 后端创建好订单以后，返回订单信息（response）
       const order = await response.json();
+      // 然后将订单信息添加到本地存储里面
       addToOrder(order);
     } catch(error){
       console.error('Error placing order', error)
