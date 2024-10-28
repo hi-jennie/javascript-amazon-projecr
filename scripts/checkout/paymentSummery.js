@@ -2,7 +2,8 @@ import { cart } from '../../data/cart.js';
 import { deliveryOptions, getDeliveryOption } from '../../data/deliveryOption.js';
 import { getProductById, products } from '../../data/products.js';
 import { formatCurrency } from '../utils/money.js'
-import {addToOrder} from '../../data/orders.js';
+import {addToOrder, createOrder} from '../../data/orders.js';
+import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 
 export function renderPaymentSummery(){
   let totalItemPrice = 0;
@@ -67,6 +68,12 @@ export function renderPaymentSummery(){
   `;
   document.querySelector('.js-payment-summery').innerHTML = html;
 
+  document.querySelector('.js-place-order').addEventListener('click', ()=>{
+    const date = dayjs().format('MMMM D');
+    createOrder(cart, date);
+  })
+
+  /*
   document.querySelector('.js-place-order').addEventListener('click', async ()=>{
     try{
       // 将购物车里面的内容发动到后端用于创建订单
@@ -89,4 +96,5 @@ export function renderPaymentSummery(){
 
     window.location.href = 'orders.html';
   });
+  */
 }

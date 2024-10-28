@@ -99,8 +99,8 @@ export function loadProducts(fun){
 }
 
 
-/*
-export const products = [
+
+products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     image: "images/products/athletic-cotton-socks-6-pairs.jpg",
@@ -765,10 +765,10 @@ export const products = [
   }
   return new Product(productDetails);
 });
-*/
+
 
 const date = new Date();
-console.log(date.toLocaleTimeString());
+
 
 // special feature of this keyword
 // inside a method, 'this' refers to the object that owns the method
@@ -784,15 +784,15 @@ const object = {
 function logThis(){
   console.log(this);
 }
-logThis(); // in this situation, this is undefined
-logThis.call('hello'); // in this situation, this is a string
+// logThis(); // in this situation, this is undefined
+// logThis.call('hello'); // in this situation, this is a string
 
 
 // arrow function does not change the value of this 
 this
 const object3 = {
   method: ()=>{
-    console.log(this); // this is the value outsized the arrow function
+    // console.log(this); // this is the value outsized the arrow function
   }
 }
 

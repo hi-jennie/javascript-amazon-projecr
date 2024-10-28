@@ -88,3 +88,7 @@ export function loadCart(fun){
   xhr.open('GET', 'https://supersimplebackend.dev/cart');
   xhr.send();
 }
+
+export function findCartItem(productId){
+  return cart.find((item)=>item.productId === productId);
+}
