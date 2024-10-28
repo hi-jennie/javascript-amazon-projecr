@@ -1,4 +1,4 @@
-import { cart } from '../../data/cart.js';
+import { cart, removeFromCart } from '../../data/cart.js';
 import { deliveryOptions, getDeliveryOption } from '../../data/deliveryOption.js';
 import { getProductById, products } from '../../data/products.js';
 import { formatCurrency } from '../utils/money.js'
@@ -61,7 +61,7 @@ export function renderPaymentSummery(){
     </div>
 
     <button class="place-order-button button-primary
-      js-place-order">
+      js-place-order" data-total-price=${formatCurrency(totalPriceCents+taxCents)}>
       Place your order
     </button>
  
@@ -69,8 +69,9 @@ export function renderPaymentSummery(){
   document.querySelector('.js-payment-summery').innerHTML = html;
 
   document.querySelector('.js-place-order').addEventListener('click', ()=>{
-    const date = dayjs().format('MMMM D');
-    createOrder(cart, date);
+    const totalPrice = document.querySelector('.js-place-order').dataset.totalPrice;
+    createOrder(cart, totalPrice, dayjs().format('MMMM D'));
+    
   })
 
   /*

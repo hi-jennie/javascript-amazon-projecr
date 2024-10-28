@@ -12,7 +12,6 @@ console.log(orders);
 
 orders.forEach((order) => {
   let orderHTML = ''; // 每个订单的 HTML  
-  let total = 0;
   
  
   // 遍历订单中的商品 ID 数组
@@ -22,7 +21,6 @@ orders.forEach((order) => {
   productIdArr.forEach((productId) => {
     const matchingProduct = getProductById(productId);
     const matchingCartItem = findCartItem(productId);
-    total += matchingProduct.priceCents * matchingCartItem.quantity;
     
     detailsHTML += `
       <div class="order-details-grid js-order-details-grid">
@@ -67,7 +65,7 @@ orders.forEach((order) => {
         </div>
         <div class="order-total">
           <div class="order-header-label">Total:</div>
-          <div>$${formatCurrency(total)}</div>
+          <div>$${order.totalPrice}</div>
         </div>
       </div>
       <div class="order-header-right-section">
